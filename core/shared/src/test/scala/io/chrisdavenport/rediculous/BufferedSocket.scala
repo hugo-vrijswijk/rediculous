@@ -2,7 +2,7 @@ package io.chrisdavenport.rediculous.util
 
 import cats.syntax.all._
 import fs2._
-import fs2.io.net.{Socket, SocketOption, SocketMetrics}
+import fs2.io.net.{Socket, SocketOption}
 import cats.effect._
 import com.comcast.ip4s.{IpAddress, SocketAddress, GenSocketAddress}
 
@@ -27,8 +27,6 @@ private[rediculous] object BufferedSocket{
     override def setOption[A](key: SocketOption.Key[A], value: A): F[Unit] = socket.setOption(key, value)
 
     override def peerAddress: GenSocketAddress = socket.peerAddress
-
-    override def metrics: SocketMetrics = socket.metrics
 
     def buffer(bytes: Chunk[Byte]): F[Unit] = buffer.update{
       case Some(b1) => (b1 ++ bytes).some
@@ -56,7 +54,7 @@ private[rediculous] object BufferedSocket{
     
     def endOfOutput: F[Unit] = socket.endOfOutput
     
-    def isOpen: F[Boolean] =  socket.isOpen
+    def isOpen: F[Boolean] = socket.isOpen
     
     def remoteAddress: F[SocketAddress[IpAddress]] = socket.remoteAddress
     

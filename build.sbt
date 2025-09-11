@@ -16,14 +16,14 @@ ThisBuild / githubWorkflowBuildPreamble ++= nativeBrewInstallWorkflowSteps.value
 
 
 val catsV = "2.13.0"
-val catsEffectV = "3.7.0-RC1"
-val fs2V = "3.13.0-M7"
+val catsEffectV = "3.7.0"
+val fs2V = "3.13.0"
 
 
-val munitCatsEffectV = "2.2.0-RC1"
+val munitCatsEffectV = "2.2.0"
 
-ThisBuild / crossScalaVersions := Seq("2.12.20","2.13.16", "3.3.6")
-ThisBuild / scalaVersion := "2.13.16"
+ThisBuild / crossScalaVersions := Seq("2.12.21","2.13.18", "3.3.7")
+ThisBuild / scalaVersion := "2.13.18"
 ThisBuild / versionScheme := Some("early-semver")
 
 // Projects
@@ -46,11 +46,11 @@ lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
       "co.fs2"                      %%% "fs2-io"                     % fs2V,
       "co.fs2"                      %%% "fs2-scodec"                 % fs2V,
 
-      "org.typelevel"               %%% "keypool"                    % "0.5.0-RC1",
+      "org.typelevel"               %%% "keypool"                    % "0.4.11",
       
 
       "org.typelevel"               %%% "munit-cats-effect"          % munitCatsEffectV         % Test,
-      "org.scalameta"               %%% "munit-scalacheck"            % "1.2.0" % Test,
+      "org.scalameta"               %%% "munit-scalacheck"            % "1.3.0" % Test,
     ),
     libraryDependencies += "org.scodec" %%% "scodec-core" % (if (scalaVersion.value.startsWith("2.")) "1.11.11" else "2.3.3"),
   ).jsSettings(
